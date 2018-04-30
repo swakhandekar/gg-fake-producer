@@ -1,0 +1,12 @@
+{
+  "type" : "record",
+  "name" : "StudentDepartment",
+  "namespace" : "model.StudentDepartment",
+  "fields" : [ {
+    "name" : "studentId",
+    "type" : "Long"
+  }, {
+    "name" : "departmentId",
+    "type" : "Long"
+  } ]
+}

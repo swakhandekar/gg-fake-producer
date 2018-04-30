@@ -2,7 +2,7 @@ package com.swapnil
 
 import java.util.Properties
 
-import com.swapnil.producer.FakePayloadProducer
+import com.swapnil.producer.{FakePayloadProducer, FakeSchemaProducer}
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.StreamsConfig
 
@@ -18,7 +18,7 @@ object Start extends App {
     props
   }
 
-//  import org.apache.kafka.common.serialization.ByteArraySerializer
   private val payloadProducer = new FakePayloadProducer(config)
   payloadProducer.sendMessage("ogg-payload")
+  new FakeSchemaProducer(config).sendMessage("ogg-schema")
 }

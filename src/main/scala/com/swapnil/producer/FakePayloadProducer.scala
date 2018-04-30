@@ -5,8 +5,6 @@ import java.util.{Calendar, Properties}
 
 import com.sksamuel.avro4s._
 import com.swapnil.model.{GenericWrapper, Student, StudentDepartment}
-import org.apache.avro.io.EncoderFactory
-import org.apache.avro.specific.SpecificDatumWriter
 import org.apache.avro.{Schema, SchemaNormalization}
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
