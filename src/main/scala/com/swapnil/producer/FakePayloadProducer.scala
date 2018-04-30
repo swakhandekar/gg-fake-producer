@@ -59,6 +59,7 @@ class FakePayloadProducer(val config: Properties) {
     combinedBuffer.write(formStudentMessage(student))
     combinedBuffer.write(delimiter.getBytes())
     combinedBuffer.write(formStudentDepartmentMessage(studentDept))
+    combinedBuffer.write(delimiter.getBytes())
     combinedBuffer.close()
 
     combinedBuffer.toByteArray

@@ -2,9 +2,9 @@ package com.swapnil.producer
 
 import java.util.Properties
 
+import com.sksamuel.avro4s.AvroSchema
+import com.swapnil.model.{Student, StudentDepartment}
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-
-import scala.io.Source
 
 class FakeSchemaProducer(val config: Properties) {
   private var producer: KafkaProducer[String, String] = _
@@ -12,8 +12,8 @@ class FakeSchemaProducer(val config: Properties) {
   def sendMessage(topic: String) = {
     openProducer()
 
-    val studentSchema = Source.fromURI(getClass.getClassLoader.getResource("avro/student.avsc").toURI).mkString
-    val studentDepartmentSchema = Source.fromURI(getClass.getClassLoader.getResource("avro/student-department.avsc").toURI).mkString
+    val studentSchema = AvroSchema[Student].toString(false)
+    val studentDepartmentSchema = AvroSchema[StudentDepartment].toString(false)
     producer.send(new ProducerRecord[String, String](topic, "", studentSchema))
     producer.send(new ProducerRecord[String, String](topic, "", studentDepartmentSchema))
 
