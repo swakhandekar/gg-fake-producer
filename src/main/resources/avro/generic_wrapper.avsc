@@ -1,0 +1,15 @@
+{
+  "type" : "record",
+  "name" : "generic_wrapper",
+  "namespace" : "oracle.goldengate",
+  "fields" : [ {
+    "name" : "table_name",
+    "type" : "string"
+  }, {
+    "name" : "schema_fingerprint",
+    "type" : "long"
+  }, {
+    "name" : "payload",
+    "type" : "bytes"
+  } ]
+}
