@@ -17,7 +17,7 @@ class FakePayloadProducer(val config: Properties) {
   private val COMP_DEPT = 2L
 
   private def newAdmission(): (Student, StudentDepartment) = {
-    val student = Student(1, "Swapnil", 23, Calendar.getInstance().getTime().toString)
+    val student = Student(1, "Swapnil", 23, Calendar.getInstance().getTime.toString)
     val studentDepartmentMapping = StudentDepartment(student.id, COMP_DEPT)
 
     (student, studentDepartmentMapping)
@@ -51,24 +51,22 @@ class FakePayloadProducer(val config: Properties) {
     wrapInGenericWrapper(studentDept, studentDepartmentSchema)
   }
 
-  private def combineMessages(delimiter: String): Array[Byte] = {
+  private def combineMessages() = {
     val combinedBuffer = new ByteArrayOutputStream()
     val (student, studentDept) = newAdmission()
 
 
     combinedBuffer.write(formStudentMessage(student))
-    combinedBuffer.write(delimiter.getBytes())
     combinedBuffer.write(formStudentDepartmentMessage(studentDept))
-    combinedBuffer.write(delimiter.getBytes())
     combinedBuffer.close()
 
     combinedBuffer.toByteArray
   }
 
-  def sendMessage(topic: String) = {
+  def sendMessage(topic: String): Unit = {
     openProducer()
 
-    producer.send(new ProducerRecord[String, Array[Byte]](topic, System.currentTimeMillis().toString, combineMessages("^")))
+    producer.send(new ProducerRecord[String, Array[Byte]](topic, System.currentTimeMillis().toString, combineMessages()))
 
     close()
   }
